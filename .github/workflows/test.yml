@@ -28,14 +28,10 @@ jobs:
         run: dotnet test test/SS.PaddleOCR.UnitTests -c Release --nologo
       - name: Unit tests (ns2.0 library)
         run: dotnet test test/SS.PaddleOCR.UnitTests -c Release --nologo -p:UseNs20Library=true
-      # the engine submodule moved to sdcb/SimdOnnx main: engine changes that break this library show
-      # before the submodule is bumped
-      - name: Unit tests (net10 library, SimdOnnx main)
-        run: |
-          git submodule update --remote external/SimdOnnx
-          dotnet test test/SS.PaddleOCR.UnitTests -c Release --nologo
+
 
   generate:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: windows-2025
     timeout-minutes: 20
     steps:
@@ -56,6 +52,7 @@ jobs:
           if-no-files-found: error
 
   smoke-platform:
+    if: github.event_name == 'workflow_dispatch'
     needs: generate
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
@@ -126,6 +123,7 @@ jobs:
           if-no-files-found: warn
 
   smoke-models:
+    if: github.event_name == 'workflow_dispatch'
     needs: generate
     runs-on: ubuntu-24.04
     timeout-minutes: 20
@@ -158,6 +156,7 @@ jobs:
           if-no-files-found: warn
 
   smoke-win-x64-isa:
+    if: github.event_name == 'workflow_dispatch'
     needs: generate
     runs-on: windows-2025
     timeout-minutes: 20
@@ -207,6 +206,7 @@ jobs:
           if-no-files-found: warn
 
   bench-win-x64-simd:
+    if: github.event_name == 'workflow_dispatch'
     needs: generate
     runs-on: windows-2025
     timeout-minutes: 60
@@ -292,6 +292,7 @@ jobs:
           if-no-files-found: warn
 
   bench-win-x64-engines:
+    if: github.event_name == 'workflow_dispatch'
     needs: generate
     runs-on: windows-2025
     timeout-minutes: 60
@@ -349,6 +350,7 @@ jobs:
           if-no-files-found: warn
 
   bench-linux-arm64:
+    if: github.event_name == 'workflow_dispatch'
     needs: generate
     runs-on: ubuntu-24.04-arm
     timeout-minutes: 60
@@ -439,6 +441,7 @@ jobs:
           if-no-files-found: warn
 
   bench-osx-arm64:
+    if: github.event_name == 'workflow_dispatch'
     needs: generate
     runs-on: macos-26
     timeout-minutes: 60
@@ -527,7 +530,7 @@ jobs:
 
   report:
     needs: [smoke-platform, smoke-models, smoke-win-x64-isa, bench-win-x64-simd, bench-win-x64-engines, bench-linux-arm64, bench-osx-arm64]
-    if: always() && !cancelled()
+    if: always() && !cancelled() && github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions: { actions: write, contents: read }

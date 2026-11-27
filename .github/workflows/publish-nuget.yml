@@ -1,0 +1,99 @@
+name: publish-nuget
+
+# Publishes the seven SS.PaddleOCR packages to nuget.org.
+#
+# Setup (once):
+#   1. nuget.org -> Account -> API keys -> Create, scope
+#      "Push new packages and package versions", glob pattern SS.PaddleOCR*
+#      (and pick the SS.PaddleOCR owners if the key is scoped by owner).
+#   2. GitHub repo -> Settings -> Secrets and variables -> Actions ->
+#      New repository secret named NUGET_API_KEY with that key as the value.
+#   3. Run this workflow once with dry_run = true to confirm packing works,
+#      then run it again with dry_run = false to publish.
+#
+# The key is only ever read from the secret into the process environment and
+# handed to `dotnet nuget push --api-key`; it is never written to disk or logged.
+#
+# Alternative without a long-lived key: nuget.org "Trusted Publishing" (OIDC).
+# Then drop the secret, add `id-token: write` to permissions below and replace the
+# publish step with NuGet/login@v1 (user: <nuget.org username>) + `dotnet nuget push
+# --api-key ${{ steps.login.outputs.NUGET_API_KEY }}`. See
+# https://learn.microsoft.com/nuget/nuget-org/trusted-publishing
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Override every package version (e.g. 1.0.1). Leave empty to use the versions in Directory.Build.props / build/pack-nuget.ps1.'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Pack and print the push plan only - no key needed, nothing is published.'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-nuget
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: windows-2025
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v7
+
+      # The repo does not pin an SDK; the projects target net10.0 and are developed
+      # on the 11.0.1xx SDK. Install it if the runner image does not already have it.
+      - uses: actions/setup-dotnet@v5
+        continue-on-error: true
+        with:
+          dotnet-version: '11.0.x'
+
+      - name: Report SDK
+        shell: powershell
+        run: dotnet --list-sdks
+
+      - name: Pack
+        shell: powershell
+        env:
+          PACK_VERSION: ${{ inputs.version }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $packArgs = @('-Clean')
+          if (-not [string]::IsNullOrWhiteSpace($env:PACK_VERSION)) {
+            $packArgs += @('-Version', $env:PACK_VERSION)
+          }
+          ./build/pack-nuget.ps1 @packArgs
+          Get-ChildItem nupkgs -Filter *.nupkg | ForEach-Object {
+            Write-Host ("  {0,-52} {1,9:N2} MB" -f $_.Name, ($_.Length / 1MB))
+          }
+
+      - name: Publish to nuget.org
+        shell: powershell
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:DRY_RUN -eq 'true') {
+            Write-Host 'dry run: showing the push plan, nothing will be published' -ForegroundColor Yellow
+            ./build/publish-nuget.ps1 -WhatIf
+            exit 0
+          }
+          if ([string]::IsNullOrWhiteSpace($env:NUGET_API_KEY)) {
+            throw 'The NUGET_API_KEY repository secret is not set. Add it under Settings -> Secrets and variables -> Actions, or run this workflow with dry_run = true to validate packing only.'
+          }
+          ./build/publish-nuget.ps1 -ApiKey $env:NUGET_API_KEY
+
+      - name: Upload packages
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: nupkgs
+          path: nupkgs/*.nupkg
+          if-no-files-found: warn
+          retention-days: 14

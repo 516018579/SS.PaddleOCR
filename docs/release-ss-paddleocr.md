@@ -72,6 +72,28 @@ dotnet nuget push nupkgs/SS.PaddleOCR.1.0.0.nupkg                              -
 `--skip-duplicate` 已在脚本里，重复跑不会报错。推完等几分钟索引，再看
 <https://www.nuget.org/packages/SS.PaddleOCR>。
 
+## 用 GitHub Actions 发布（不用本地 key）
+
+工作流：[`.github/workflows/publish-nuget.yml`](../.github/workflows/publish-nuget.yml)，
+在 `windows-2025` 上依次执行 `build/pack-nuget.ps1 -Clean` 和 `build/publish-nuget.ps1`，
+7 个 `.nupkg` 也作为构建产物上传保留 14 天。
+
+一次性配置：
+
+1. nuget.org → Account → API keys → Create：scope 选 "Push new packages and package versions"，
+   glob pattern 填 `SS.PaddleOCR*`；
+2. 仓库 → Settings → Secrets and variables → Actions → New repository secret，
+   名字 **`NUGET_API_KEY`**，值粘贴上面那把 key；
+3. Actions → `publish-nuget` → Run workflow：
+   - 先跑一次 `dry_run = true`：只打包 + 打印推送计划，不需要 key，不会发布任何东西；
+   - 再跑 `dry_run = false`：真正推送（`--skip-duplicate`，重复跑安全）。
+   - `version` 留空 = 用 `Directory.Build.props` / `pack-nuget.ps1` 里的版本；填 `1.0.1` 则整批改版本。
+
+key 只从 secret 读进进程环境再交给 `dotnet nuget push --api-key`，不落盘、不写日志。
+不想长期保存 key 的话，可以改用 nuget.org 的 **Trusted Publishing**（OIDC）：删掉 secret，
+给工作流加 `id-token: write`，把发布步骤换成 `NuGet/login@v1` + 它输出的短时 key，
+详见 <https://learn.microsoft.com/nuget/nuget-org/trusted-publishing>。
+
 ## 消费方式
 
 ```powershell

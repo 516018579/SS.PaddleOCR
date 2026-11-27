@@ -4,7 +4,7 @@
     `dotnet pack -p:Version=` must not flow into referenced projects; see Directory.Build.targets.
   -->
   <PropertyGroup>
-    <SSPaddleOCRVersion Condition="'$(SSPaddleOCRVersion)' == ''">1.0.0</SSPaddleOCRVersion>
+    <SSPaddleOCRVersion Condition="'$(SSPaddleOCRVersion)' == ''">1.0.1</SSPaddleOCRVersion>
     <SSPaddleOCRModelProviderVersion Condition="'$(SSPaddleOCRModelProviderVersion)' == ''">1.0.0</SSPaddleOCRModelProviderVersion>
     <SSPaddleOCRModelsTextLineOrientationVersion Condition="'$(SSPaddleOCRModelsTextLineOrientationVersion)' == ''">1.0.0</SSPaddleOCRModelsTextLineOrientationVersion>
     <SSPaddleOCRModelsChineseV6TinyVersion Condition="'$(SSPaddleOCRModelsChineseV6TinyVersion)' == ''">1.0.0</SSPaddleOCRModelsChineseV6TinyVersion>

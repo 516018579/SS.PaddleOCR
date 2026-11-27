@@ -164,13 +164,15 @@ Console.WriteLine(result.Text);
 
 ## 后续版本（2026-11-27 / 28）
 
-只发布核心包 `SS.PaddleOCR`，6 个模型包内容未变、继续停在 1.0.0（工作流对已存在的版本
-`--skip-duplicate`，每次都会重推一遍但被 nuget.org 以 `already exists` 跳过）。
+先只发核心包 `SS.PaddleOCR`，6 个模型包当时内容未变、停在 1.0.0（工作流对已存在的版本
+`--skip-duplicate`，每次都会重推一遍但被 nuget.org 以 `already exists` 跳过）；随后把
+6 个模型包也升到 1.0.1，让它们带上同样的元数据修正，见本节末尾。
 
 | 版本 | run | 内容 |
 | --- | --- | --- |
 | 1.0.1 | [`46025109109`](https://github.com/516018579/SS.PaddleOCR/actions/runs/46025109109) | 行方向分类器的双判据兜底：分类器投 180° 时先按正立识别，只有翻转后识别分数更高才真转（`VerifyFlipsByRecognition` 默认开、`FlipVerifyMinClassifierScore` 默认 0）。韩语漫画样张从 4/5 行翻错变为 5/5 正确。 |
 | 1.0.2 | [`46031307150`](https://github.com/516018579/SS.PaddleOCR/actions/runs/46031307150) | 元数据修正：`Authors` = `Rinne`、`PackageProjectUrl` / `RepositoryUrl` = `https://github.com/516018579/SS.PaddleOCR`。内容与 1.0.1 相同。 |
+| 模型包 1.0.1 | [`46033338717`](https://github.com/516018579/SS.PaddleOCR/actions/runs/46033338717) | `ModelProvider`、`TextLineOrientation` 与 4 个模型包从 1.0.0 升到 1.0.1，只带元数据修正，内容不变；核心包仍是 1.0.2（重推被 `already exists` 跳过）。 |
 
 - 两次都是先 `dry_run = true` 验证日志打出对应的 `SS.PaddleOCR.<ver>.nupkg` 与
   `WhatIf: nothing was pushed`，再 `dry_run = false` 真推；`--skip-duplicate` 让 6 个
@@ -184,3 +186,9 @@ Console.WriteLine(result.Text);
   `https://github.com/516018579/SS.PaddleOCR`，Repository 指向同名 `.git`。
   README 正文里的「源仓库 https://github.com/sdcb/SimdPaddleOCR」是对上游的出处说明，
   保持原样。
+- 模型包 1.0.1 的版本表同样三处同步（`Directory.Build.props:8-13`、`build/00-common.linq:32-37`、
+  `build/pack-nuget.ps1:41-46`），模型包依赖也随之指向 `TextLineOrientation 1.0.1` +
+  `ModelProvider 1.0.1`（本地解包 nuspec 核对）。
+- 最终核对（2026-11-28T00:41Z，`azuresearch` 逐包 `packageid:` 轮询约 7 分钟才全部刷新）：
+  7 个包全部命中 `authors = Rinne`、`projectUrl = https://github.com/516018579/SS.PaddleOCR`，
+  版本为 核心 1.0.2 / 其余 1.0.1。

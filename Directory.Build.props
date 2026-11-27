@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <!--
-    Inference engine: the SimdOnnx source, a git submodule at external/SimdOnnx, compiled into
+    Inference engine: the SimdOnnx source, a vendored checkout at external/SimdOnnx, compiled into
     SS.PaddleOCR with every engine type internal (no engine package to pin; see SimdOnnx
     docs/decisions.md, 2026-11-18). Override SimdOnnxRoot to build against another checkout.
   -->

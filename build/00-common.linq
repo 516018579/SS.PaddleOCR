@@ -29,12 +29,12 @@ static void Run(string exe, string args, Encoding encoding) => Util.Cmd(exe, arg
 static ProjectVersion[] Projects =
 {
 	new("SS.PaddleOCR", "1.0.2"),
-	new("SS.PaddleOCR.ModelProvider", "1.0.0"),
-	new("SS.PaddleOCR.Models.TextLineOrientation", "1.0.0"),
-	new("SS.PaddleOCR.Models.ChineseV6Tiny", "1.0.0"),
-	new("SS.PaddleOCR.Models.ChineseV6Small", "1.0.0"),
-	new("SS.PaddleOCR.Models.ChineseV6Medium", "1.0.0"),
-	new("SS.PaddleOCR.Models.KoreanV5Mobile", "1.0.0"),
+	new("SS.PaddleOCR.ModelProvider", "1.0.1"),
+	new("SS.PaddleOCR.Models.TextLineOrientation", "1.0.1"),
+	new("SS.PaddleOCR.Models.ChineseV6Tiny", "1.0.1"),
+	new("SS.PaddleOCR.Models.ChineseV6Small", "1.0.1"),
+	new("SS.PaddleOCR.Models.ChineseV6Medium", "1.0.1"),
+	new("SS.PaddleOCR.Models.KoreanV5Mobile", "1.0.1"),
 };
 
 static string VersionPropertyName(string projectName) => projectName.Replace(".", "") + "Version";

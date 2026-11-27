@@ -38,12 +38,12 @@ $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 # Project name -> default version. Dependencies first so the console order is readable;
 # nuget.org itself does not care about push order.
 $packages = @(
-    @{ Name = 'SS.PaddleOCR.ModelProvider';                  Version = '1.0.0' }
-    @{ Name = 'SS.PaddleOCR.Models.TextLineOrientation';    Version = '1.0.0' }
-    @{ Name = 'SS.PaddleOCR.Models.ChineseV6Tiny';          Version = '1.0.0' }
-    @{ Name = 'SS.PaddleOCR.Models.ChineseV6Small';         Version = '1.0.0' }
-    @{ Name = 'SS.PaddleOCR.Models.ChineseV6Medium';        Version = '1.0.0' }
-    @{ Name = 'SS.PaddleOCR.Models.KoreanV5Mobile';         Version = '1.0.0' }
+    @{ Name = 'SS.PaddleOCR.ModelProvider';                  Version = '1.0.1' }
+    @{ Name = 'SS.PaddleOCR.Models.TextLineOrientation';    Version = '1.0.1' }
+    @{ Name = 'SS.PaddleOCR.Models.ChineseV6Tiny';          Version = '1.0.1' }
+    @{ Name = 'SS.PaddleOCR.Models.ChineseV6Small';         Version = '1.0.1' }
+    @{ Name = 'SS.PaddleOCR.Models.ChineseV6Medium';        Version = '1.0.1' }
+    @{ Name = 'SS.PaddleOCR.Models.KoreanV5Mobile';         Version = '1.0.1' }
     @{ Name = 'SS.PaddleOCR';                               Version = '1.0.2' }
 )
 

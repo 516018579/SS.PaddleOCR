@@ -5,12 +5,12 @@
   -->
   <PropertyGroup>
     <SSPaddleOCRVersion Condition="'$(SSPaddleOCRVersion)' == ''">1.0.2</SSPaddleOCRVersion>
-    <SSPaddleOCRModelProviderVersion Condition="'$(SSPaddleOCRModelProviderVersion)' == ''">1.0.0</SSPaddleOCRModelProviderVersion>
-    <SSPaddleOCRModelsTextLineOrientationVersion Condition="'$(SSPaddleOCRModelsTextLineOrientationVersion)' == ''">1.0.0</SSPaddleOCRModelsTextLineOrientationVersion>
-    <SSPaddleOCRModelsChineseV6TinyVersion Condition="'$(SSPaddleOCRModelsChineseV6TinyVersion)' == ''">1.0.0</SSPaddleOCRModelsChineseV6TinyVersion>
-    <SSPaddleOCRModelsChineseV6SmallVersion Condition="'$(SSPaddleOCRModelsChineseV6SmallVersion)' == ''">1.0.0</SSPaddleOCRModelsChineseV6SmallVersion>
-    <SSPaddleOCRModelsChineseV6MediumVersion Condition="'$(SSPaddleOCRModelsChineseV6MediumVersion)' == ''">1.0.0</SSPaddleOCRModelsChineseV6MediumVersion>
-    <SSPaddleOCRModelsKoreanV5MobileVersion Condition="'$(SSPaddleOCRModelsKoreanV5MobileVersion)' == ''">1.0.0</SSPaddleOCRModelsKoreanV5MobileVersion>
+    <SSPaddleOCRModelProviderVersion Condition="'$(SSPaddleOCRModelProviderVersion)' == ''">1.0.1</SSPaddleOCRModelProviderVersion>
+    <SSPaddleOCRModelsTextLineOrientationVersion Condition="'$(SSPaddleOCRModelsTextLineOrientationVersion)' == ''">1.0.1</SSPaddleOCRModelsTextLineOrientationVersion>
+    <SSPaddleOCRModelsChineseV6TinyVersion Condition="'$(SSPaddleOCRModelsChineseV6TinyVersion)' == ''">1.0.1</SSPaddleOCRModelsChineseV6TinyVersion>
+    <SSPaddleOCRModelsChineseV6SmallVersion Condition="'$(SSPaddleOCRModelsChineseV6SmallVersion)' == ''">1.0.1</SSPaddleOCRModelsChineseV6SmallVersion>
+    <SSPaddleOCRModelsChineseV6MediumVersion Condition="'$(SSPaddleOCRModelsChineseV6MediumVersion)' == ''">1.0.1</SSPaddleOCRModelsChineseV6MediumVersion>
+    <SSPaddleOCRModelsKoreanV5MobileVersion Condition="'$(SSPaddleOCRModelsKoreanV5MobileVersion)' == ''">1.0.1</SSPaddleOCRModelsKoreanV5MobileVersion>
   </PropertyGroup>
 
   <!--

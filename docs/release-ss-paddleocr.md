@@ -135,3 +135,29 @@ Console.WriteLine(result.Text);
   - 中文整页（v6 medium）：`你好世界` 1.0000、`中文识别测试` 0.9999，397 ms 两行。
 - 与 ONNX Runtime 逐元素对拍：rec 4/4、det 3/3、cls 1e-6 内一致；修复前后 A/B 见
   [docs/v5_rec.md](v5_rec.md) 的「补记 2026-11-26」。
+
+## 已发布到 nuget.org（2026-11-27）
+
+- 工作流 run [`45936281434`](https://github.com/516018579/SS.PaddleOCR/actions/runs/45936281434)：
+  `dry_run = false`，2026-11-27T03:48:20Z → 03:49:55Z，7 个 `.nupkg` 与 7 个 `.snupkg`
+  逐个 `Your package was pushed`，无告警级失败（仅上游 `Intrinsics.cs` 的 CS0108 编译警告）。
+- 同一工作流的前两次 run（`45933914425`、`45934923697`）是 `dry_run = true`，
+  日志停在 `WhatIf: nothing was pushed`，只产出了 nupkgs artifact。
+- 发布结果（azuresearch `packageid:` 均命中，registration `listed = true`）：
+
+  | 包 | 版本 | published (UTC) |
+  | --- | --- | --- |
+  | SS.PaddleOCR | 1.0.0 | 2026-11-27T03:49:44Z |
+  | SS.PaddleOCR.ModelProvider | 1.0.0 | 2026-11-27T03:49:27Z |
+  | SS.PaddleOCR.Models.TextLineOrientation | 1.0.0 | 2026-11-27T03:49:29Z |
+  | SS.PaddleOCR.Models.ChineseV6Tiny | 1.0.0 | 2026-11-27T03:49:32Z |
+  | SS.PaddleOCR.Models.ChineseV6Small | 1.0.0 | 2026-11-27T03:49:35Z |
+  | SS.PaddleOCR.Models.ChineseV6Medium | 1.0.0 | 2026-11-27T03:49:39Z |
+  | SS.PaddleOCR.Models.KoreanV5Mobile | 1.0.0 | 2026-11-27T03:49:42Z |
+
+- 依赖关系与 nupkg 内 README 已在 nuget.org 上核对：核心包依赖 `ModelProvider`，
+  各模型包依赖 `TextLineOrientation` + `ModelProvider`，与本地 nuspec 一致。
+- 元数据遗留（1.0.0 不可变，只能发 1.0.1 才能改）：`Directory.Build.props` 里的
+  `<Authors>sdcb</Authors>`、`PackageProjectUrl`、`RepositoryUrl` 仍是上游
+  `https://github.com/sdcb/SimdPaddleOCR`，所以包页面的 Project Site / Repository 链接
+  与 README 里的徽章都指向上游仓库，而不是本仓库。

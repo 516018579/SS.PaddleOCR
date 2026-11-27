@@ -120,6 +120,26 @@ public sealed class PaddleOcrOptions
     /// </summary>
     public float ClassifierThreshold { get; init; } = 0f;
     /// <summary>
+    /// Re-check a 180-degree verdict with the recognizer instead of trusting
+    /// the classifier alone. The text-line orientation model is trained on
+    /// document scans; on bold display faces (comic lettering, posters) it can
+    /// report a confident 180° for an upright line, and flipping such a line
+    /// turns a readable row into garbage. When enabled, a line whose class-1
+    /// score reaches <see cref="FlipVerifyMinClassifierScore"/> is recognized
+    /// in both orientations and the higher-scoring text wins; only the
+    /// candidate lines pay the second REC. Default <c>true</c>.
+    /// </summary>
+    public bool VerifyFlipsByRecognition { get; init; } = true;
+    /// <summary>
+    /// Class-1 confidence gate for <see cref="VerifyFlipsByRecognition"/>.
+    /// Default <c>0</c>: every 180° verdict is double-checked. The orientation
+    /// model's confidence carries little information about whether it saw a
+    /// rotated line or an unfamiliar font, so gating on it only lets the wrong
+    /// flips through. One extra REC per candidate line is cheap next to decoding
+    /// a whole row wrong.
+    /// </summary>
+    public float FlipVerifyMinClassifierScore { get; init; } = 0f;
+    /// <summary>
     /// How many CLS / REC line workers run at once. Each worker may
     /// hold its own CLS and REC session, so memory scales with this value.
     /// A positive value is a maximum, clamped to

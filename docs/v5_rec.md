@@ -248,4 +248,6 @@ mobile 中英同构，修一次两个都能加载。`PP-OCRv5_server_rec` 没拆
 
 配套落地：`SS.PaddleOCR.Models.KoreanV5Mobile` 1.0.0（`PP-OCRv5_mobile_det` + `korean_PP-OCRv5_mobile_rec` + `inference.yml` 里抽出的 11945 行字典，CLS 复用 `TextLineOrientation`）。干净目录只用 nupkg 安装验证：`안녕하세요` / `대한민국 서울` / `오늘 날씨가 좋네요` 置信度 0.97–1.00，268 ms 三行。该包要求核心 `SS.PaddleOCR` ≥ 1.0.0（含上述布局修复）。
 
-仍未做：rec-only gold 的固定回归网（上文第 3 条那套）、其它语种 V5 rec、server rec。行方向分类器在合成图上有误判，但引擎与 ORT 结果一致，属于模型本身的行为，`PaddleOcrOptions.ClassifierThreshold` 默认 0（有标签就转）比 PaddleOCR 的 0.9 更激进，接入方需要时自行提高。
+仍未做：rec-only gold 的固定回归网（上文第 3 条那套）、其它语种 V5 rec、server rec。
+
+行方向分类器在粗体展示字（漫画字、海报字）上会给出高置信度的**错误** 180° 判断——引擎与 ORT 结果一致，问题在模型本身。实测（本地样张 `tools/PackageSmokeTest/samples/ko_bubble.bmp`，未入库，5 行韩语漫画字）旧行为 4/5 行被翻成乱码，而同一批行正立识别 0.94–0.99 全对。现在的兜底是 `PaddleOcrOptions.VerifyFlipsByRecognition`（默认开启）：凡分类器投 180° 的行，都再把正立版和翻转版各识别一次，取分数高的那个；`FlipVerifyMinClassifierScore`（默认 `0` = 全部复核）可设门限只为更自信的票付第二次 REC，`VerifyFlipsByRecognition=false` 回到旧行为。同一张图改后 5/5 行正确，`AppliedRotationDegrees` 报实际施加的旋转（0），`ClassificationLabel` 仍报分类器原始 top-1（1）。代价是每个 180° 候选行多一次 REC；`ClassifierThreshold` 默认 0（有标签就转）保持不变。

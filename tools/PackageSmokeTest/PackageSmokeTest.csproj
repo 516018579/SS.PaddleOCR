@@ -5,9 +5,21 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RestorePackagesPath>packages</RestorePackagesPath>
+    <!--
+      Default: consume the published packages, which is what this tool exists to
+      check. For working on the library itself, run with
+      -p:UseProjectCore=true to swap the core package for a project reference
+      (the model packages still come from NuGet).
+    -->
+    <UseProjectCore Condition="'$(UseProjectCore)' == ''">false</UseProjectCore>
   </PropertyGroup>
-  <ItemGroup>
+  <ItemGroup Condition="'$(UseProjectCore)' != 'true'">
     <PackageReference Include="SS.PaddleOCR" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(UseProjectCore)' == 'true'">
+    <ProjectReference Include="..\..\src\SS.PaddleOCR\SS.PaddleOCR.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="SS.PaddleOCR.Models.KoreanV5Mobile" Version="1.0.0" />
     <PackageReference Include="SS.PaddleOCR.Models.ChineseV6Small" Version="1.0.0" />
     <PackageReference Include="SS.PaddleOCR.Models.ChineseV6Medium" Version="1.0.0" />

@@ -27,6 +27,8 @@ bench-out/
 # 本地备份与冒烟测试缓存（不随包发布）
 _archive/
 tools/PackageSmokeTest/packages/
+# ad-hoc OCR samples used for local diagnosis; not part of the repo
+tools/PackageSmokeTest/samples/
 tools/OrtRefProbe/lib/*.dll
 
 # 打包产物（pack-nuget.ps1 的输出）

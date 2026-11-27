@@ -118,6 +118,10 @@ public sealed class PaddleOcrAll : IDisposable
         if (_options.RecBatchLines < 1) throw new ArgumentOutOfRangeException(nameof(options));
         if (_options.ClassifierThreshold is < 0 or > 1 || !MathCompat.IsFinite(_options.ClassifierThreshold))
             throw new ArgumentOutOfRangeException(nameof(options));
+        if (_options.FlipVerifyMinClassifierScore is < 0 or > 1
+            || !MathCompat.IsFinite(_options.FlipVerifyMinClassifierScore))
+            throw new ArgumentOutOfRangeException(nameof(options),
+                "FlipVerifyMinClassifierScore must be between 0 and 1.");
         if (!_options.UseDirectionClassification) classifierModel = null;
         if (_options.UseDirectionClassification && classifierModel is null)
             throw new ArgumentNullException(nameof(classifierModel));
@@ -480,6 +484,11 @@ public sealed class PaddleOcrAll : IDisposable
                 });
             }
 
+            // Confident 180° verdicts get the recognizer's second opinion once
+            // the batch results are in (only candidate lines re-run).
+            VerifyFlips(count, workerCount, LineIntraOpBudget(count), cropBuffer, offsets, bytes, widths,
+                heights, labels, clsScores, rotations, recResults, returnCtcAlignment);
+
             for (int i = 0; i < count; i++)
             {
                 lines[i] = MakeLine(boxes[i], recResults[i], clsScores[i], labels[i], rotations[i]);
@@ -613,6 +622,7 @@ public sealed class PaddleOcrAll : IDisposable
         uint label = 0;
         float clsScore = 0;
         int rotation = 0;
+        bool verifyFlip = false;
         if (classifier is not null)
         {
             long clsStart = s_profileEnabled ? Stopwatch.GetTimestamp() : 0;
@@ -622,15 +632,116 @@ public sealed class PaddleOcrAll : IDisposable
             clsScore = result.Score;
             if ((label & 1u) != 0 && clsScore > _options.ClassifierThreshold)
             {
-                PPOCRCrop.Rotate180(cropBuffer.AsSpan(offsets[i], bytes[i]), widths[i], heights[i]);
-                rotation = 180;
+                verifyFlip = ShouldVerifyFlip(label, clsScore);
+                if (!verifyFlip)
+                {
+                    PPOCRCrop.Rotate180(cropBuffer.AsSpan(offsets[i], bytes[i]), widths[i], heights[i]);
+                    rotation = 180;
+                }
             }
         }
         long recStart = s_profileEnabled ? Stopwatch.GetTimestamp() : 0;
         PaddleOcrRecognitionResult recognition = recognizer.Recognize(crop, widths[i], heights[i],
             0, ImagePixelFormat.Bgr24, recIntraOp, returnCtcAlignment);
         if (s_profileEnabled) AddProfile(4, recStart);
+        if (verifyFlip)
+        {
+            // The classifier wants 180°, but on display faces it can be
+            // confidently wrong, and a wrong flip destroys the whole row.
+            // The crop is still upright here, so the flipped read is the second
+            // opinion; the higher-scoring text wins and the loser's rotation is
+            // undo. Only candidate lines pay the second REC.
+            PPOCRCrop.Rotate180(cropBuffer.AsSpan(offsets[i], bytes[i]), widths[i], heights[i]);
+            long altStart = s_profileEnabled ? Stopwatch.GetTimestamp() : 0;
+            PaddleOcrRecognitionResult flipped = recognizer.Recognize(crop, widths[i], heights[i],
+                0, ImagePixelFormat.Bgr24, recIntraOp, returnCtcAlignment);
+            if (s_profileEnabled) AddProfile(4, altStart);
+            if (flipped.Score > recognition.Score)
+            {
+                recognition = flipped;
+                rotation = 180;
+            }
+            else
+            {
+                PPOCRCrop.Rotate180(cropBuffer.AsSpan(offsets[i], bytes[i]), widths[i], heights[i]);
+            }
+        }
         lines[i] = MakeLine(boxes[i], recognition, clsScore, label, rotation);
+    }
+
+    /// <summary>
+    /// True when a class-1 verdict is confident enough that the cost of one
+    /// extra REC (to keep an upright line from being flipped into garbage) is
+    /// worth paying. <see cref="PaddleOcrLine.ClassificationLabel"/> still
+    /// reports the classifier's raw top-1; <see cref="PaddleOcrLine.AppliedRotationDegrees"/>
+    /// reports what was actually applied.
+    /// </summary>
+    private bool ShouldVerifyFlip(uint label, float clsScore) =>
+        ShouldVerifyFlip(_options, label, clsScore);
+
+    internal static bool ShouldVerifyFlip(PaddleOcrOptions options, uint label, float clsScore) =>
+        options.VerifyFlipsByRecognition && (label & 1u) != 0
+        && clsScore >= options.FlipVerifyMinClassifierScore;
+
+    // Batched-REC tail: a batched classifier produced labels/clsScores for
+    // every line, so the confident 180° verdicts only need the recognizer's
+    // second opinion here, once the batch results exist.
+    private void VerifyFlips(int count, int workerCount, int recIntraOp, byte[] cropBuffer,
+        int[] offsets, int[] bytes, int[] widths, int[] heights, uint[] labels, float[] clsScores,
+        int[] rotations, PaddleOcrRecognitionResult[] recResults, bool returnCtcAlignment)
+    {
+        if (_classifier is null || !_options.VerifyFlipsByRecognition) return;
+        int[] candidates = PooledArrays.Rent<int>(count);
+        try
+        {
+            int candidateCount = 0;
+            for (int i = 0; i < count; i++)
+                if (rotations[i] == 180 && ShouldVerifyFlip(labels[i], clsScores[i]))
+                    candidates[candidateCount++] = i;
+            if (candidateCount == 0) return;
+            int active = Math.Max(1, Math.Min(workerCount, candidateCount));
+            if (active <= 1)
+            {
+                VerifyFlipRange(candidates, 0, candidateCount, 1, recIntraOp, cropBuffer, offsets, bytes,
+                    widths, heights, rotations, recResults, returnCtcAlignment);
+                return;
+            }
+            Parallel.For(0, active, worker =>
+                VerifyFlipRange(candidates, worker, candidateCount, active, recIntraOp, cropBuffer,
+                    offsets, bytes, widths, heights, rotations, recResults, returnCtcAlignment));
+        }
+        finally
+        {
+            PooledArrays.Return(candidates);
+        }
+    }
+
+    private void VerifyFlipRange(int[] candidates, int first, int count, int stride, int recIntraOp,
+        byte[] cropBuffer, int[] offsets, int[] bytes, int[] widths, int[] heights, int[] rotations,
+        PaddleOcrRecognitionResult[] recResults, bool returnCtcAlignment)
+    {
+        PaddleOcrRecognizer recognizer = _recognizer;
+        for (int c = first; c < count; c += stride)
+        {
+            int i = candidates[c];
+            ReadOnlySpan<byte> crop = cropBuffer.AsSpan(offsets[i], bytes[i]);
+            // The crop is stored rotated (that is what the batch recognized),
+            // so undo the rotation to read it upright and compare scores.
+            PPOCRCrop.Rotate180(cropBuffer.AsSpan(offsets[i], bytes[i]), widths[i], heights[i]);
+            long recStart = s_profileEnabled ? Stopwatch.GetTimestamp() : 0;
+            PaddleOcrRecognitionResult upright = recognizer.Recognize(crop, widths[i], heights[i],
+                0, ImagePixelFormat.Bgr24, recIntraOp, returnCtcAlignment);
+            if (s_profileEnabled) AddProfile(4, recStart);
+            if (upright.Score > recResults[i].Score)
+            {
+                recResults[i] = upright;
+                rotations[i] = 0;
+            }
+            else
+            {
+                PPOCRCrop.Rotate180(cropBuffer.AsSpan(offsets[i], bytes[i]), widths[i], heights[i]);
+            }
+        }
     }
 
     private static PaddleOcrLine MakeLine(in PaddleOcrDetectionBox box, in PaddleOcrRecognitionResult recognition,

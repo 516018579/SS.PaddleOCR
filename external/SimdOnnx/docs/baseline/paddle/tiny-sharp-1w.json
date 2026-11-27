@@ -16755,4 +16755,1261 @@
         "det_graph": 25.46499999999969,
         "det_postprocess": 1.3135000000000048,
         "crop": 1.4227999999999952,
-        "cls_preprocess": 2.1644000000000005
+        "cls_preprocess": 2.1644000000000005,
+        "cls_graph": 12.830399999999827,
+        "rec_preprocess": 3.955699999999979,
+        "rec_graph": 45.69549999999981,
+        "rec_postprocess": 0,
+        "lines_wall": 66.26140000000032,
+        "crop_setup": 0.0019000000000000128,
+        "rec_acquire": 0,
+        "cls_acquire": 0.0015999999999998238,
+        "rec_decode": 0.019500000000000295,
+        "rec_release": 0.002799999999999969,
+        "cls_release": 0.0030999999999999917,
+        "rec_cache_get": 0.0002999999999999947,
+        "rec_rent": 0.0013000000000000789,
+        "rec_pool": 0.00030000000000000165,
+        "rec_reshape": 1.405699999999996,
+        "det_unclip": 0.012099999999999778
+      },
+      "stage_calls": {
+        "det_preprocess": 1,
+        "det_graph": 1,
+        "det_postprocess": 1,
+        "crop": 1,
+        "cls_preprocess": 14,
+        "cls_graph": 14,
+        "rec_preprocess": 14,
+        "rec_graph": 14,
+        "rec_postprocess": 0,
+        "lines_wall": 1,
+        "crop_setup": 1,
+        "rec_acquire": 0,
+        "cls_acquire": 14,
+        "rec_decode": 14,
+        "rec_release": 14,
+        "cls_release": 14,
+        "rec_cache_get": 14,
+        "rec_rent": 14,
+        "rec_pool": 14,
+        "rec_reshape": 14,
+        "det_unclip": 14
+      },
+      "operator_ms": {
+        "Conv": {
+          "ms": 64.4135,
+          "calls": 1049
+        },
+        "Add": {
+          "ms": 2.3472,
+          "calls": 35
+        },
+        "Mul": {
+          "ms": 2.2171,
+          "calls": 125
+        },
+        "Erf": {
+          "ms": 3.575,
+          "calls": 27
+        },
+        "HardSigmoid": {
+          "ms": 0.01,
+          "calls": 83
+        },
+        "BatchNormalization": {
+          "ms": 0.1643,
+          "calls": 28
+        },
+        "ReduceMean": {
+          "ms": 1.5766,
+          "calls": 97
+        },
+        "Relu": {
+          "ms": 0.007,
+          "calls": 70
+        },
+        "AveragePool": {
+          "ms": 0.1803,
+          "calls": 14
+        },
+        "Squeeze": {
+          "ms": 0.0322,
+          "calls": 42
+        },
+        "Transpose": {
+          "ms": 0.2316,
+          "calls": 42
+        },
+        "Unsqueeze": {
+          "ms": 0.0189,
+          "calls": 28
+        },
+        "MatMul": {
+          "ms": 3.8008,
+          "calls": 28
+        },
+        "Reshape": {
+          "ms": 0.003,
+          "calls": 14
+        },
+        "Concat": {
+          "ms": 1.3912,
+          "calls": 2
+        },
+        "ConvTranspose": {
+          "ms": 0.9064,
+          "calls": 2
+        },
+        "MaxPool": {
+          "ms": 0.5394,
+          "calls": 1
+        },
+        "Resize": {
+          "ms": 0.7284,
+          "calls": 6
+        },
+        "LayoutConvert": {
+          "ms": 1.6191,
+          "calls": 72
+        }
+      },
+      "conv_class_ms": {
+        "Conv1x1": {
+          "ms": 35.4311,
+          "calls": 453
+        },
+        "Depthwise3x3": {
+          "ms": 7.7797,
+          "calls": 139
+        },
+        "Stride2Conv3x3": {
+          "ms": 3.4938,
+          "calls": 28
+        },
+        "OtherConv": {
+          "ms": 1.1244,
+          "calls": 18
+        }
+      },
+      "detected": 14,
+      "lines": 14,
+      "hash": "fc3bfa1d2ee79a04",
+      "texts": [
+        "性能测试 2026",
+        "文本识别结果",
+        "28C",
+        "2026-08-30 validation text",
+        "Alternating backend benchmark measures cold shape creation and steady state",
+        "纯托管推理引|擎不依赖native library并且支持多个动态输入尺寸",
+        "smal I",
+        "温度",
+        "天气晴朗",
+        "model validation",
+        "Invoice number 20260830 amount 128.50 date 2",
+        "方向分类180 度",
+        "纯托管 C#推理",
+        "Batch size eight"
+      ],
+      "rotations": [
+        0,
+        0,
+        0,
+        0,
+        180,
+        0,
+        180,
+        0,
+        0,
+        180,
+        0,
+        0,
+        0,
+        0
+      ],
+      "working_set_mb": 501.51171875
+    },
+    {
+      "file": "img-095.jpg",
+      "width": 992,
+      "height": 592,
+      "warmup": false,
+      "total_ms": 60.8787,
+      "stage_ms": {
+        "det_preprocess": 0.7810000000000059,
+        "det_graph": 19.7484000000004,
+        "det_postprocess": 0.7135999999999854,
+        "crop": 0.6359000000000208,
+        "cls_preprocess": 1.2206999999999937,
+        "cls_graph": 7.34660000000008,
+        "rec_preprocess": 2.3197000000000116,
+        "rec_graph": 27.73279999999977,
+        "rec_postprocess": 0,
+        "lines_wall": 38.881500000000415,
+        "crop_setup": 0.0017000000000000348,
+        "rec_acquire": 0,
+        "cls_acquire": 0.00140000000000029,
+        "rec_decode": 0.017699999999999605,
+        "rec_release": 0.0016999999999999793,
+        "cls_release": 0.0015999999999999903,
+        "rec_cache_get": 0.00010000000000001674,
+        "rec_rent": 0.0007999999999999119,
+        "rec_pool": 0.0001999999999999988,
+        "rec_reshape": 0.18540000000000134,
+        "det_unclip": 0.008500000000000174
+      },
+      "stage_calls": {
+        "det_preprocess": 1,
+        "det_graph": 1,
+        "det_postprocess": 1,
+        "crop": 1,
+        "cls_preprocess": 8,
+        "cls_graph": 8,
+        "rec_preprocess": 8,
+        "rec_graph": 8,
+        "rec_postprocess": 0,
+        "lines_wall": 1,
+        "crop_setup": 1,
+        "rec_acquire": 0,
+        "cls_acquire": 8,
+        "rec_decode": 8,
+        "rec_release": 8,
+        "cls_release": 8,
+        "rec_cache_get": 8,
+        "rec_rent": 8,
+        "rec_pool": 8,
+        "rec_reshape": 8,
+        "det_unclip": 8
+      },
+      "operator_ms": {
+        "Conv": {
+          "ms": 41.4485,
+          "calls": 635
+        },
+        "Add": {
+          "ms": 1.6884,
+          "calls": 29
+        },
+        "Mul": {
+          "ms": 1.6222,
+          "calls": 77
+        },
+        "Erf": {
+          "ms": 2.5128,
+          "calls": 21
+        },
+        "HardSigmoid": {
+          "ms": 0.0062,
+          "calls": 53
+        },
+        "BatchNormalization": {
+          "ms": 0.0951,
+          "calls": 16
+        },
+        "ReduceMean": {
+          "ms": 1.0555,
+          "calls": 61
+        },
+        "Relu": {
+          "ms": 0.004,
+          "calls": 40
+        },
+        "AveragePool": {
+          "ms": 0.1084,
+          "calls": 8
+        },
+        "Squeeze": {
+          "ms": 0.0186,
+          "calls": 24
+        },
+        "Transpose": {
+          "ms": 0.1565,
+          "calls": 24
+        },
+        "Unsqueeze": {
+          "ms": 0.0115,
+          "calls": 16
+        },
+        "MatMul": {
+          "ms": 2.3978,
+          "calls": 16
+        },
+        "Reshape": {
+          "ms": 0.0019,
+          "calls": 8
+        },
+        "Concat": {
+          "ms": 0.9721,
+          "calls": 2
+        },
+        "ConvTranspose": {
+          "ms": 0.7249,
+          "calls": 2
+        },
+        "MaxPool": {
+          "ms": 0.3064,
+          "calls": 1
+        },
+        "Resize": {
+          "ms": 0.4723,
+          "calls": 6
+        },
+        "LayoutConvert": {
+          "ms": 1.0793,
+          "calls": 42
+        }
+      },
+      "conv_class_ms": {
+        "Conv1x1": {
+          "ms": 23.2049,
+          "calls": 279
+        },
+        "Depthwise3x3": {
+          "ms": 5.2558,
+          "calls": 85
+        },
+        "Stride2Conv3x3": {
+          "ms": 2.0927,
+          "calls": 16
+        },
+        "OtherConv": {
+          "ms": 0.8521,
+          "calls": 12
+        }
+      },
+      "detected": 8,
+      "lines": 8,
+      "hash": "ccf78cd0bddcc3fb",
+      "texts": [
+        "PPOCRSharp dynamic recognition benchmark with variable width input",
+        "可重复性测试",
+        "宽文本行必须触发超过 320 像素的 REC 自然宽度并记录到 metadata",
+        "图像处理流水线",
+        "性能测试 2026",
+        "性能测试2026",
+        "读取发票金额128.50",
+        "读取发票金额128.50"
+      ],
+      "rotations": [
+        0,
+        180,
+        0,
+        0,
+        180,
+        0,
+        0,
+        180
+      ],
+      "working_set_mb": 501.51171875
+    },
+    {
+      "file": "img-096.jpg",
+      "width": 1600,
+      "height": 864,
+      "warmup": false,
+      "total_ms": 108.4576,
+      "stage_ms": {
+        "det_preprocess": 0.9647999999999968,
+        "det_graph": 20.3436999999999,
+        "det_postprocess": 0.8009000000000128,
+        "crop": 1.8086999999999875,
+        "cls_preprocess": 2.4224000000000103,
+        "cls_graph": 14.581900000000132,
+        "rec_preprocess": 5.503500000000031,
+        "rec_graph": 61.34140000000025,
+        "rec_postprocess": 0,
+        "lines_wall": 84.40219999999954,
+        "crop_setup": 0.0017000000000000348,
+        "rec_acquire": 0,
+        "cls_acquire": 0.0016999999999995907,
+        "rec_decode": 0.02110000000000012,
+        "rec_release": 0.003400000000000014,
+        "cls_release": 0.0030999999999999917,
+        "rec_cache_get": 0.0005999999999999894,
+        "rec_rent": 0.001100000000000101,
+        "rec_pool": 0.00030000000000000165,
+        "rec_reshape": 0.3432999999999993,
+        "det_unclip": 0.013099999999999667
+      },
+      "stage_calls": {
+        "det_preprocess": 1,
+        "det_graph": 1,
+        "det_postprocess": 1,
+        "crop": 1,
+        "cls_preprocess": 16,
+        "cls_graph": 16,
+        "rec_preprocess": 16,
+        "rec_graph": 16,
+        "rec_postprocess": 0,
+        "lines_wall": 1,
+        "crop_setup": 1,
+        "rec_acquire": 0,
+        "cls_acquire": 16,
+        "rec_decode": 16,
+        "rec_release": 16,
+        "cls_release": 16,
+        "rec_cache_get": 16,
+        "rec_rent": 16,
+        "rec_pool": 16,
+        "rec_reshape": 16,
+        "det_unclip": 16
+      },
+      "operator_ms": {
+        "Conv": {
+          "ms": 76.6227,
+          "calls": 1187
+        },
+        "Add": {
+          "ms": 1.5378,
+          "calls": 37
+        },
+        "Mul": {
+          "ms": 1.7034,
+          "calls": 141
+        },
+        "Erf": {
+          "ms": 4.1629,
+          "calls": 29
+        },
+        "HardSigmoid": {
+          "ms": 0.0102,
+          "calls": 93
+        },
+        "BatchNormalization": {
+          "ms": 0.2273,
+          "calls": 32
+        },
+        "ReduceMean": {
+          "ms": 1.3122,
+          "calls": 109
+        },
+        "Relu": {
+          "ms": 0.0068,
+          "calls": 80
+        },
+        "AveragePool": {
+          "ms": 0.2575,
+          "calls": 16
+        },
+        "Squeeze": {
+          "ms": 0.0473,
+          "calls": 48
+        },
+        "Transpose": {
+          "ms": 0.3258,
+          "calls": 48
+        },
+        "Unsqueeze": {
+          "ms": 0.0276,
+          "calls": 32
+        },
+        "MatMul": {
+          "ms": 5.3473,
+          "calls": 32
+        },
+        "Reshape": {
+          "ms": 0.0035,
+          "calls": 16
+        },
+        "Concat": {
+          "ms": 1.0822,
+          "calls": 2
+        },
+        "ConvTranspose": {
+          "ms": 0.7165,
+          "calls": 2
+        },
+        "MaxPool": {
+          "ms": 0.4231,
+          "calls": 1
+        },
+        "Resize": {
+          "ms": 0.4572,
+          "calls": 6
+        },
+        "LayoutConvert": {
+          "ms": 1.7334,
+          "calls": 82
+        }
+      },
+      "conv_class_ms": {
+        "Conv1x1": {
+          "ms": 43.2609,
+          "calls": 511
+        },
+        "Depthwise3x3": {
+          "ms": 10.5724,
+          "calls": 157
+        },
+        "Stride2Conv3x3": {
+          "ms": 4.6795,
+          "calls": 32
+        },
+        "OtherConv": {
+          "ms": 0.927,
+          "calls": 20
+        }
+      },
+      "detected": 16,
+      "lines": 16,
+      "hash": "ddbf79d38edd0afc",
+      "texts": [
+        "性能测试2026",
+        "The quick brown fox jumps over the lazy dog while OCR reads every word",
+        "accuracy metadata",
+        "accuracy metadata",
+        "天气晴朗温度 28C",
+        "The quick brown fox jumps over the lazy dog while OCR reads every word",
+        "Invoice number 20260830 amount 128.50 date 2026-08-30 validation text",
+        "文本识别结果",
+        "PPoCRSharp benchmark",
+        "可重复性测试",
+        "The quick brown fox",
+        "Batch size eight",
+        "纯托管 C#推理",
+        "可重复性测试",
+        "No native dependency",
+        "Alternating backend benchmark measures cold shape creation and steady state"
+      ],
+      "rotations": [
+        0,
+        180,
+        0,
+        0,
+        0,
+        0,
+        180,
+        0,
+        0,
+        0,
+        180,
+        0,
+        0,
+        0,
+        180,
+        0
+      ],
+      "working_set_mb": 501.51171875
+    },
+    {
+      "file": "img-097.jpg",
+      "width": 1056,
+      "height": 1136,
+      "warmup": false,
+      "total_ms": 96.6257,
+      "stage_ms": {
+        "det_preprocess": 1.1270999999999844,
+        "det_graph": 28.078899999999976,
+        "det_postprocess": 1.2802000000000078,
+        "crop": 1.469699999999989,
+        "cls_preprocess": 2.1469999999999914,
+        "cls_graph": 12.837599999999838,
+        "rec_preprocess": 3.668700000000001,
+        "rec_graph": 45.217900000000554,
+        "rec_postprocess": 0,
+        "lines_wall": 64.54979999999978,
+        "crop_setup": 0.0016000000000000458,
+        "rec_acquire": 0,
+        "cls_acquire": 0.0011999999999998678,
+        "rec_decode": 0.019099999999999895,
+        "rec_release": 0.0030000000000000027,
+        "cls_release": 0.003300000000000025,
+        "rec_cache_get": 0.0005000000000000004,
+        "rec_rent": 0.0015999999999999348,
+        "rec_pool": 0.00030000000000000165,
+        "rec_reshape": 0.417500000000004,
+        "det_unclip": 0.013500000000000068
+      },
+      "stage_calls": {
+        "det_preprocess": 1,
+        "det_graph": 1,
+        "det_postprocess": 1,
+        "crop": 1,
+        "cls_preprocess": 14,
+        "cls_graph": 14,
+        "rec_preprocess": 14,
+        "rec_graph": 14,
+        "rec_postprocess": 0,
+        "lines_wall": 1,
+        "crop_setup": 1,
+        "rec_acquire": 0,
+        "cls_acquire": 14,
+        "rec_decode": 14,
+        "rec_release": 14,
+        "cls_release": 14,
+        "rec_cache_get": 14,
+        "rec_rent": 14,
+        "rec_pool": 14,
+        "rec_reshape": 14,
+        "det_unclip": 14
+      },
+      "operator_ms": {
+        "Conv": {
+          "ms": 65.2391,
+          "calls": 1049
+        },
+        "Add": {
+          "ms": 2.5683,
+          "calls": 35
+        },
+        "Mul": {
+          "ms": 2.4937,
+          "calls": 125
+        },
+        "Erf": {
+          "ms": 3.361,
+          "calls": 27
+        },
+        "HardSigmoid": {
+          "ms": 0.0093,
+          "calls": 83
+        },
+        "BatchNormalization": {
+          "ms": 0.1539,
+          "calls": 28
+        },
+        "ReduceMean": {
+          "ms": 1.6265,
+          "calls": 97
+        },
+        "Relu": {
+          "ms": 0.0062,
+          "calls": 70
+        },
+        "AveragePool": {
+          "ms": 0.1769,
+          "calls": 14
+        },
+        "Squeeze": {
+          "ms": 0.0316,
+          "calls": 42
+        },
+        "Transpose": {
+          "ms": 0.2261,
+          "calls": 42
+        },
+        "Unsqueeze": {
+          "ms": 0.0189,
+          "calls": 28
+        },
+        "MatMul": {
+          "ms": 3.7453,
+          "calls": 28
+        },
+        "Reshape": {
+          "ms": 0.0037,
+          "calls": 14
+        },
+        "Concat": {
+          "ms": 1.577,
+          "calls": 2
+        },
+        "ConvTranspose": {
+          "ms": 1.4112,
+          "calls": 2
+        },
+        "MaxPool": {
+          "ms": 0.7238,
+          "calls": 1
+        },
+        "Resize": {
+          "ms": 0.8286,
+          "calls": 6
+        },
+        "LayoutConvert": {
+          "ms": 1.7116,
+          "calls": 72
+        }
+      },
+      "conv_class_ms": {
+        "Conv1x1": {
+          "ms": 35.5145,
+          "calls": 453
+        },
+        "Depthwise3x3": {
+          "ms": 8.1807,
+          "calls": 139
+        },
+        "Stride2Conv3x3": {
+          "ms": 3.4043,
+          "calls": 28
+        },
+        "OtherConv": {
+          "ms": 1.3012,
+          "calls": 18
+        }
+      },
+      "detected": 14,
+      "lines": 14,
+      "hash": "244209abeca4eef1",
+      "texts": [
+        "OpenVINO and pure managed CSharp performance comparison 2026",
+        "天气晴朗温度 28C",
+        "Invoice number 20260830 amount 128.50 date 2026-08-30 validation text",
+        "图像处理流水线",
+        "small model validation",
+        "2026",
+        "small model validation",
+        "性能测试",
+        "PaddleOCR reference",
+        "可重复性测试",
+        "宽度排序与填充",
+        "PaddleOCR reference",
+        "dependency",
+        "No native"
+      ],
+      "rotations": [
+        180,
+        0,
+        180,
+        180,
+        0,
+        0,
+        0,
+        0,
+        180,
+        0,
+        0,
+        180,
+        0,
+        0
+      ],
+      "working_set_mb": 501.51171875
+    },
+    {
+      "file": "img-098.jpg",
+      "width": 1664,
+      "height": 480,
+      "warmup": false,
+      "total_ms": 83.7632,
+      "stage_ms": {
+        "det_preprocess": 0.5311000000000092,
+        "det_graph": 12.551899999999932,
+        "det_postprocess": 0.48799999999999955,
+        "crop": 0.8349000000000046,
+        "cls_preprocess": 1.8088999999999942,
+        "cls_graph": 10.803499999999985,
+        "rec_preprocess": 5.2269000000000005,
+        "rec_graph": 50.86019999999917,
+        "rec_postprocess": 0,
+        "lines_wall": 69.23890000000029,
+        "crop_setup": 0.0014999999999998348,
+        "rec_acquire": 0,
+        "cls_acquire": 0.000900000000000567,
+        "rec_decode": 0.023700000000000276,
+        "rec_release": 0.0023000000000000242,
+        "cls_release": 0.0025000000000000022,
+        "rec_cache_get": 0.00020000000000000573,
+        "rec_rent": 0.0007000000000000339,
+        "rec_pool": 0.00030000000000000165,
+        "rec_reshape": 0.4025000000000034,
+        "det_unclip": 0.009600000000000275
+      },
+      "stage_calls": {
+        "det_preprocess": 1,
+        "det_graph": 1,
+        "det_postprocess": 1,
+        "crop": 1,
+        "cls_preprocess": 12,
+        "cls_graph": 12,
+        "rec_preprocess": 12,
+        "rec_graph": 12,
+        "rec_postprocess": 0,
+        "lines_wall": 1,
+        "crop_setup": 1,
+        "rec_acquire": 0,
+        "cls_acquire": 12,
+        "rec_decode": 12,
+        "rec_release": 12,
+        "cls_release": 12,
+        "rec_cache_get": 12,
+        "rec_rent": 12,
+        "rec_pool": 12,
+        "rec_reshape": 12,
+        "det_unclip": 12
+      },
+      "operator_ms": {
+        "Conv": {
+          "ms": 60.6424,
+          "calls": 911
+        },
+        "Add": {
+          "ms": 1.0129,
+          "calls": 33
+        },
+        "Mul": {
+          "ms": 1.196,
+          "calls": 109
+        },
+        "Erf": {
+          "ms": 3.1352,
+          "calls": 25
+        },
+        "HardSigmoid": {
+          "ms": 0.008,
+          "calls": 73
+        },
+        "BatchNormalization": {
+          "ms": 0.2042,
+          "calls": 24
+        },
+        "ReduceMean": {
+          "ms": 0.9348,
+          "calls": 85
+        },
+        "Relu": {
+          "ms": 0.0049,
+          "calls": 60
+        },
+        "AveragePool": {
+          "ms": 0.2568,
+          "calls": 12
+        },
+        "Squeeze": {
+          "ms": 0.0419,
+          "calls": 36
+        },
+        "Transpose": {
+          "ms": 0.3214,
+          "calls": 36
+        },
+        "Unsqueeze": {
+          "ms": 0.0253,
+          "calls": 24
+        },
+        "MatMul": {
+          "ms": 3.6222,
+          "calls": 24
+        },
+        "Reshape": {
+          "ms": 0.0029,
+          "calls": 12
+        },
+        "Concat": {
+          "ms": 0.5317,
+          "calls": 2
+        },
+        "ConvTranspose": {
+          "ms": 0.4806,
+          "calls": 2
+        },
+        "MaxPool": {
+          "ms": 0.1864,
+          "calls": 1
+        },
+        "Resize": {
+          "ms": 0.2611,
+          "calls": 6
+        },
+        "LayoutConvert": {
+          "ms": 1.1526,
+          "calls": 62
+        }
+      },
+      "conv_class_ms": {
+        "Conv1x1": {
+          "ms": 34.5708,
+          "calls": 395
+        },
+        "Depthwise3x3": {
+          "ms": 8.6255,
+          "calls": 121
+        },
+        "Stride2Conv3x3": {
+          "ms": 4.2385,
+          "calls": 24
+        },
+        "OtherConv": {
+          "ms": 0.7445,
+          "calls": 16
+        }
+      },
+      "detected": 12,
+      "lines": 12,
+      "hash": "ee3f7b07dde00528",
+      "texts": [
+        "这是一段明显较长的中文文本用于测试动态识别宽度和压缩行为",
+        "这是一段明显较长的中文文本用于测试动态识别宽度和压缩行为",
+        "检测后处理与文字方向分类应该保持和 PaddleOCR 官方结果一致",
+        "天气晴朗温度 28C",
+        "OpenVINO and pure managed CSharp performance comparison 2026",
+        "PPOCRSharp dynamic recognition benchmark with variable width input",
+        "OpenVINO dynamic width",
+        "可重复性测试",
+        "这是一段明显较长的中文文本用于测试动态识别宽度和压缩行为",
+        "Dynamic shape session",
+        "文本识别结果",
+        "PPOCRSharp dynamic recognition benchmark with variable width input"
+      ],
+      "rotations": [
+        180,
+        180,
+        0,
+        180,
+        0,
+        0,
+        180,
+        0,
+        0,
+        0,
+        0,
+        180
+      ],
+      "working_set_mb": 501.5234375
+    },
+    {
+      "file": "img-099.jpg",
+      "width": 1104,
+      "height": 752,
+      "warmup": false,
+      "total_ms": 89.4622,
+      "stage_ms": {
+        "det_preprocess": 0.804300000000012,
+        "det_graph": 21.80580000000009,
+        "det_postprocess": 0.7752999999999872,
+        "crop": 1.3523000000000138,
+        "cls_preprocess": 1.976300000000009,
+        "cls_graph": 11.954300000000103,
+        "rec_preprocess": 4.177499999999952,
+        "rec_graph": 45.98410000000058,
+        "rec_postprocess": 0,
+        "lines_wall": 64.59690000000046,
+        "crop_setup": 0.0019000000000000128,
+        "rec_acquire": 0,
+        "cls_acquire": 0.0015000000000000568,
+        "rec_decode": 0.02210000000000001,
+        "rec_release": 0.0030999999999999917,
+        "cls_release": 0.00269999999999998,
+        "rec_cache_get": 0.0002999999999999947,
+        "rec_rent": 0.0014999999999999458,
+        "rec_pool": 0.0002999999999999947,
+        "rec_reshape": 0.430499999999995,
+        "det_unclip": 0.01089999999999991
+      },
+      "stage_calls": {
+        "det_preprocess": 1,
+        "det_graph": 1,
+        "det_postprocess": 1,
+        "crop": 1,
+        "cls_preprocess": 13,
+        "cls_graph": 13,
+        "rec_preprocess": 13,
+        "rec_graph": 13,
+        "rec_postprocess": 0,
+        "lines_wall": 1,
+        "crop_setup": 1,
+        "rec_acquire": 0,
+        "cls_acquire": 13,
+        "rec_decode": 13,
+        "rec_release": 13,
+        "cls_release": 13,
+        "rec_cache_get": 13,
+        "rec_rent": 13,
+        "rec_pool": 13,
+        "rec_reshape": 13,
+        "det_unclip": 13
+      },
+      "operator_ms": {
+        "Conv": {
+          "ms": 62.2225,
+          "calls": 980
+        },
+        "Add": {
+          "ms": 1.8956,
+          "calls": 34
+        },
+        "Mul": {
+          "ms": 1.8092,
+          "calls": 117
+        },
+        "Erf": {
+          "ms": 3.1755,
+          "calls": 26
+        },
+        "HardSigmoid": {
+          "ms": 0.0091,
+          "calls": 78
+        },
+        "BatchNormalization": {
+          "ms": 0.1747,
+          "calls": 26
+        },
+        "ReduceMean": {
+          "ms": 1.3331,
+          "calls": 91
+        },
+        "Relu": {
+          "ms": 0.0061,
+          "calls": 65
+        },
+        "AveragePool": {
+          "ms": 0.2075,
+          "calls": 13
+        },
+        "Squeeze": {
+          "ms": 0.0345,
+          "calls": 39
+        },
+        "Transpose": {
+          "ms": 0.2422,
+          "calls": 39
+        },
+        "Unsqueeze": {
+          "ms": 0.0204,
+          "calls": 26
+        },
+        "MatMul": {
+          "ms": 3.9072,
+          "calls": 26
+        },
+        "Reshape": {
+          "ms": 0.0036,
+          "calls": 13
+        },
+        "Concat": {
+          "ms": 1.1173,
+          "calls": 2
+        },
+        "ConvTranspose": {
+          "ms": 0.7629,
+          "calls": 2
+        },
+        "MaxPool": {
+          "ms": 0.3906,
+          "calls": 1
+        },
+        "Resize": {
+          "ms": 0.5639,
+          "calls": 6
+        },
+        "LayoutConvert": {
+          "ms": 1.6613,
+          "calls": 67
+        }
+      },
+      "conv_class_ms": {
+        "Conv1x1": {
+          "ms": 34.5071,
+          "calls": 424
+        },
+        "Depthwise3x3": {
+          "ms": 8.266,
+          "calls": 130
+        },
+        "Stride2Conv3x3": {
+          "ms": 3.3659,
+          "calls": 26
+        },
+        "OtherConv": {
+          "ms": 1.14,
+          "calls": 17
+        }
+      },
+      "detected": 13,
+      "lines": 13,
+      "hash": "84df5ad607154bd6",
+      "texts": [
+        "The quick brown fox jumps over the lazy dog while OCR reads every word",
+        "OpenVINO and pure managed CSharp performance comparison 2026",
+        "No native dependency",
+        "纯托管 C#推理",
+        "检测后处理与文字方向分类应该保持和 Paddle0CR 官方结果一致",
+        "宽度排序与填充",
+        "这是用于性能基准的更长文本行包含中文 English 以及数字 1234567890",
+        "native dependency",
+        "PaddleOCR reference",
+        "方向分类 180 度",
+        "PaddleOCR reference",
+        "No",
+        "No native dependency"
+      ],
+      "rotations": [
+        0,
+        0,
+        0,
+        180,
+        0,
+        0,
+        0,
+        0,
+        0,
+        180,
+        0,
+        0,
+        0
+      ],
+      "working_set_mb": 501.5234375
+    },
+    {
+      "file": "img-100.jpg",
+      "width": 1712,
+      "height": 1024,
+      "warmup": false,
+      "total_ms": 57.4928,
+      "stage_ms": {
+        "det_preprocess": 0.9286999999999921,
+        "det_graph": 20.926899999999932,
+        "det_postprocess": 0.5383999999999958,
+        "crop": 1.1942999999999984,
+        "cls_preprocess": 1.0686000000000035,
+        "cls_graph": 6.408400000000029,
+        "rec_preprocess": 2.1698000000000093,
+        "rec_graph": 23.914699999999357,
+        "rec_postprocess": 0,
+        "lines_wall": 33.87249999999949,
+        "crop_setup": 0.0013000000000000789,
+        "rec_acquire": 0,
+        "cls_acquire": 0.0008999999999996788,
+        "rec_decode": 0.01770000000000005,
+        "rec_release": 0.0020000000000000018,
+        "cls_release": 0.0019000000000000128,
+        "rec_cache_get": 0.0002999999999999947,
+        "rec_rent": 0.0010999999999999899,
+        "rec_pool": 0.00030000000000000165,
+        "rec_reshape": 0.2757000000000005,
+        "det_unclip": 0.008000000000000007
+      },
+      "stage_calls": {
+        "det_preprocess": 1,
+        "det_graph": 1,
+        "det_postprocess": 1,
+        "crop": 1,
+        "cls_preprocess": 7,
+        "cls_graph": 7,
+        "rec_preprocess": 7,
+        "rec_graph": 7,
+        "rec_postprocess": 0,
+        "lines_wall": 1,
+        "crop_setup": 1,
+        "rec_acquire": 0,
+        "cls_acquire": 7,
+        "rec_decode": 7,
+        "rec_release": 7,
+        "cls_release": 7,
+        "rec_cache_get": 7,
+        "rec_rent": 7,
+        "rec_pool": 7,
+        "rec_reshape": 7,
+        "det_unclip": 7
+      },
+      "operator_ms": {
+        "Conv": {
+          "ms": 37.8398,
+          "calls": 566
+        },
+        "Add": {
+          "ms": 1.9052,
+          "calls": 28
+        },
+        "Mul": {
+          "ms": 1.4132,
+          "calls": 69
+        },
+        "Erf": {
+          "ms": 2.5592,
+          "calls": 20
+        },
+        "HardSigmoid": {
+          "ms": 0.0058,
+          "calls": 48
+        },
+        "BatchNormalization": {
+          "ms": 0.1056,
+          "calls": 14
+        },
+        "ReduceMean": {
+          "ms": 1.0034,
+          "calls": 55
+        },
+        "Relu": {
+          "ms": 0.0032,
+          "calls": 35
+        },
+        "AveragePool": {
+          "ms": 0.1051,
+          "calls": 7
+        },
+        "Squeeze": {
+          "ms": 0.0189,
+          "calls": 21
+        },
+        "Transpose": {
+          "ms": 0.1411,
+          "calls": 21
+        },
+        "Unsqueeze": {
+          "ms": 0.0108,
+          "calls": 14
+        },
+        "MatMul": {
+          "ms": 2.0449,
+          "calls": 14
+        },
+        "Reshape": {
+          "ms": 0.0022,
+          "calls": 7
+        },
+        "Concat": {
+          "ms": 1.0907,
+          "calls": 2
+        },
+        "ConvTranspose": {
+          "ms": 0.8155,
+          "calls": 2
+        },
+        "MaxPool": {
+          "ms": 0.3711,
+          "calls": 1
+        },
+        "Resize": {
+          "ms": 0.4598,
+          "calls": 6
+        },
+        "LayoutConvert": {
+          "ms": 1.2252,
+          "calls": 37
+        }
+      },
+      "conv_class_ms": {
+        "Conv1x1": {
+          "ms": 20.6493,
+          "calls": 250
+        },
+        "Depthwise3x3": {
+          "ms": 4.7835,
+          "calls": 76
+        },
+        "Stride2Conv3x3": {
+          "ms": 1.8168,
+          "calls": 14
+        },
+        "OtherConv": {
+          "ms": 0.9235,
+          "calls": 11
+        }
+      },
+      "detected": 7,
+      "lines": 7,
+      "hash": "192d1760dad2be56",
+      "texts": [
+        "叙",
+        "检测后处理与文字方向分类应该保持和 PaddleOCR 官方结果一",
+        "纯托管 C#推理",
+        "检测后处理与文字方向分类应该保持和 PaddleOCR 官方结果一致",
+        "边界框与旋转",
+        "The quick brown fox",
+        "文本识别结果"
+      ],
+      "rotations": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "working_set_mb": 501.5234375
+    }
+  ]
+}

@@ -4,7 +4,7 @@
     `dotnet pack -p:Version=` must not flow into referenced projects; see Directory.Build.targets.
   -->
   <PropertyGroup>
-    <SSPaddleOCRVersion Condition="'$(SSPaddleOCRVersion)' == ''">1.0.1</SSPaddleOCRVersion>
+    <SSPaddleOCRVersion Condition="'$(SSPaddleOCRVersion)' == ''">1.0.2</SSPaddleOCRVersion>
     <SSPaddleOCRModelProviderVersion Condition="'$(SSPaddleOCRModelProviderVersion)' == ''">1.0.0</SSPaddleOCRModelProviderVersion>
     <SSPaddleOCRModelsTextLineOrientationVersion Condition="'$(SSPaddleOCRModelsTextLineOrientationVersion)' == ''">1.0.0</SSPaddleOCRModelsTextLineOrientationVersion>
     <SSPaddleOCRModelsChineseV6TinyVersion Condition="'$(SSPaddleOCRModelsChineseV6TinyVersion)' == ''">1.0.0</SSPaddleOCRModelsChineseV6TinyVersion>
@@ -23,10 +23,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Authors>sdcb</Authors>
-    <Company>Sdcb</Company>
-    <PackageProjectUrl>https://github.com/sdcb/SimdPaddleOCR</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/sdcb/SimdPaddleOCR.git</RepositoryUrl>
+    <Authors>Rinne</Authors>
+    <Company>Rinne</Company>
+    <PackageProjectUrl>https://github.com/516018579/SS.PaddleOCR</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/516018579/SS.PaddleOCR.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>Sdcb;AI;OCR;PaddleOCR;PP-OCRv6</PackageTags>

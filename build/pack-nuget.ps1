@@ -44,7 +44,7 @@ $packages = @(
     @{ Name = 'SS.PaddleOCR.Models.ChineseV6Small';         Version = '1.0.0' }
     @{ Name = 'SS.PaddleOCR.Models.ChineseV6Medium';        Version = '1.0.0' }
     @{ Name = 'SS.PaddleOCR.Models.KoreanV5Mobile';         Version = '1.0.0' }
-    @{ Name = 'SS.PaddleOCR';                               Version = '1.0.1' }
+    @{ Name = 'SS.PaddleOCR';                               Version = '1.0.2' }
 )
 
 if (-not [string]::IsNullOrWhiteSpace($Version)) {
@@ -78,7 +78,9 @@ function Find-Project([string]$name) {
 
 # One -p:<Name>Version=<ver> per package: Directory.Build.props maps these onto the
 # packable projects, and FixPackProjectReferenceVersions rewrites the ProjectReference ranges.
-$versionArgs = ($packages | ForEach-Object { "-p:$($_.Name.Replace('.', '') + 'Version')=$($_.Version)" })
+# @() keeps a single-entry table (e.g. -Only) an array: Windows PowerShell splats a bare
+# string into one argument per character the moment the list has one element.
+$versionArgs = @($packages | ForEach-Object { "-p:$($_.Name.Replace('.', '') + 'Version')=$($_.Version)" })
 
 $results = @()
 foreach ($pkg in $packages) {

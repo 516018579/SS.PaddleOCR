@@ -28,7 +28,7 @@ static void Run(string exe, string args, Encoding encoding) => Util.Cmd(exe, arg
 // SimdPaddleOCR package can depend on ModelProvider 1.0.0.
 static ProjectVersion[] Projects =
 {
-	new("SS.PaddleOCR", "1.0.1"),
+	new("SS.PaddleOCR", "1.0.2"),
 	new("SS.PaddleOCR.ModelProvider", "1.0.0"),
 	new("SS.PaddleOCR.Models.TextLineOrientation", "1.0.0"),
 	new("SS.PaddleOCR.Models.ChineseV6Tiny", "1.0.0"),

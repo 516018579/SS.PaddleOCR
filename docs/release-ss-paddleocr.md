@@ -157,7 +157,30 @@ Console.WriteLine(result.Text);
 
 - 依赖关系与 nupkg 内 README 已在 nuget.org 上核对：核心包依赖 `ModelProvider`，
   各模型包依赖 `TextLineOrientation` + `ModelProvider`，与本地 nuspec 一致。
-- 元数据遗留（1.0.0 不可变，只能发 1.0.1 才能改）：`Directory.Build.props` 里的
+- 元数据遗留（1.0.0 不可变，只能发新版本才能改）：`Directory.Build.props` 里的
   `<Authors>sdcb</Authors>`、`PackageProjectUrl`、`RepositoryUrl` 仍是上游
-  `https://github.com/sdcb/SimdPaddleOCR`，所以包页面的 Project Site / Repository 链接
-  与 README 里的徽章都指向上游仓库，而不是本仓库。
+  `https://github.com/sdcb/SimdPaddleOCR`，所以 1.0.0 的 Project Site / Repository 链接
+  指向上游仓库，而不是本仓库。该遗留已由 1.0.2 修正，见下节。
+
+## 后续版本（2026-11-27 / 28）
+
+只发布核心包 `SS.PaddleOCR`，6 个模型包内容未变、继续停在 1.0.0（工作流对已存在的版本
+`--skip-duplicate`，每次都会重推一遍但被 nuget.org 以 `already exists` 跳过）。
+
+| 版本 | run | 内容 |
+| --- | --- | --- |
+| 1.0.1 | [`46025109109`](https://github.com/516018579/SS.PaddleOCR/actions/runs/46025109109) | 行方向分类器的双判据兜底：分类器投 180° 时先按正立识别，只有翻转后识别分数更高才真转（`VerifyFlipsByRecognition` 默认开、`FlipVerifyMinClassifierScore` 默认 0）。韩语漫画样张从 4/5 行翻错变为 5/5 正确。 |
+| 1.0.2 | [`46031307150`](https://github.com/516018579/SS.PaddleOCR/actions/runs/46031307150) | 元数据修正：`Authors` = `Rinne`、`PackageProjectUrl` / `RepositoryUrl` = `https://github.com/516018579/SS.PaddleOCR`。内容与 1.0.1 相同。 |
+
+- 两次都是先 `dry_run = true` 验证日志打出对应的 `SS.PaddleOCR.<ver>.nupkg` 与
+  `WhatIf: nothing was pushed`，再 `dry_run = false` 真推；`--skip-duplicate` 让 6 个
+  已存在的模型包变成 `already exists`，只有核心包的 `.nupkg` / `.snupkg` 各出现一次
+  `Your package was pushed`。
+- 版本号的真相在 `build/pack-nuget.ps1` 的版本表（它用 `-p:<Name>Version=` 覆盖
+  `Directory.Build.props`），改版本时必须三处同步：`Directory.Build.props:7`、
+  `build/00-common.linq:31`、`build/pack-nuget.ps1:47`。
+- nuget.org 侧核对（2026-11-28T00:18Z）：`azuresearch` 的 `packageid:` 最新版本为
+  1.0.2；1.0.2 包页 Authors 显示 `Rinne`，Project Site 指向
+  `https://github.com/516018579/SS.PaddleOCR`，Repository 指向同名 `.git`。
+  README 正文里的「源仓库 https://github.com/sdcb/SimdPaddleOCR」是对上游的出处说明，
+  保持原样。

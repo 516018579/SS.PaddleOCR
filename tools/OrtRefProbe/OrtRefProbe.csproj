@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <LangVersion>preview</LangVersion>
+    <!-- 与核心包的 InternalsVisibleTo 对齐，才能直接用引擎 internal 类型（CompiledModel/PPOCRPreprocess 等） -->
+    <AssemblyName>SS.PaddleOCR.Tests</AssemblyName>
+    <RootNamespace>OrtRef</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\SS.PaddleOCR\SS.PaddleOCR.csproj" />
+    <ProjectReference Include="..\..\src\models\SS.PaddleOCR.Models.TextLineOrientation\SS.PaddleOCR.Models.TextLineOrientation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- ONNX Runtime 参考实现：托管 API + Windows x64 原生库，均为 Microsoft.ML.OnnxRuntime 1.32.0 -->
+    <Reference Include="Microsoft.ML.OnnxRuntime">
+      <HintPath>lib\Microsoft.ML.OnnxRuntime.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <None Include="lib\onnxruntime.dll" Link="onnxruntime.dll" CopyToOutputDirectory="PreserveNewest" />
+    <PackageReference Include="System.Numerics.Tensors" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>RepoRoot</_Parameter1>
+      <_Parameter2>$(MSBuildThisFileDirectory)..\..\</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+</Project>

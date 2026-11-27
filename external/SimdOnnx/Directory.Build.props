@@ -1,0 +1,17 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <Deterministic>true</Deterministic>
+    <Optimize Condition="'$(Configuration)' == 'Release'">true</Optimize>
+    <Authors>sdcb</Authors>
+    <Company>Sdcb</Company>
+    <!-- nothing here is packed: consumers embed the engine source (src/Sdcb.SimdOnnx/Sdcb.SimdOnnx.Sources.props) -->
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+</Project>

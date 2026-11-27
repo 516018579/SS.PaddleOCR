@@ -1,0 +1,37 @@
+bin/
+obj/
+.vs/
+*.f32
+*.bgr
+*.ppm
+*.trace
+*.obj
+c-trace.txt
+*.user
+*.Backup.tmp
+
+# LINQPad NuGet pack output
+build/nupkgs/
+build/nuget.exe
+
+# Other local benchmark outputs and scratch files
+.tmp-artifacts/
+perf-input/*
+artifacts/*
+fonts/
+c-assets/
+dataset/
+bench-out/
+.wrangler/
+
+# 本地备份与冒烟测试缓存（不随包发布）
+_archive/
+tools/PackageSmokeTest/packages/
+tools/OrtRefProbe/lib/*.dll
+
+# 打包产物（pack-nuget.ps1 的输出）
+nupkgs/
+*.snupkg
+
+# 本机 agent 记忆库与会话日志
+.dsh-meow/

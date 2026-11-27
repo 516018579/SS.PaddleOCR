@@ -1,0 +1,39 @@
+<Solution>
+  <Folder Name="/root/">
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+    <File Path="THIRD-PARTY-NOTICES.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/SS.PaddleOCR.ModelProvider/SS.PaddleOCR.ModelProvider.csproj" />
+    <Project Path="src/SS.PaddleOCR/SS.PaddleOCR.csproj" />
+  </Folder>
+  <Folder Name="/src/Models/">
+    <Project Path="src/models/SS.PaddleOCR.Models.ChineseV6Medium/SS.PaddleOCR.Models.ChineseV6Medium.csproj" />
+    <Project Path="src/models/SS.PaddleOCR.Models.ChineseV6Small/SS.PaddleOCR.Models.ChineseV6Small.csproj" />
+    <Project Path="src/models/SS.PaddleOCR.Models.ChineseV6Tiny/SS.PaddleOCR.Models.ChineseV6Tiny.csproj" />
+    <Project Path="src/models/SS.PaddleOCR.Models.KoreanV5Mobile/SS.PaddleOCR.Models.KoreanV5Mobile.csproj" />
+    <Project Path="src/models/SS.PaddleOCR.Models.TextLineOrientation/SS.PaddleOCR.Models.TextLineOrientation.csproj" />
+  </Folder>
+  <Folder Name="/build/">
+    <File Path="build/00-common.linq" />
+    <File Path="build/01-build-packages.linq" />
+    <File Path="build/02-publish-proget-nuget.linq" />
+  </Folder>
+  <Folder Name="/examples/">
+    <Project Path="examples/SimdCodecs.AspNetCore/SimdCodecs.AspNetCore.csproj" />
+    <Project Path="examples/SkiaSharp.Avalonia/SkiaSharp.Avalonia.csproj" />
+    <Project Path="examples/OpenCvSharp5.Wpf/OpenCvSharp5.Wpf.csproj" />
+    <Project Path="examples/SystemDrawing.WinForms/SystemDrawing.WinForms.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/SS.PaddleOCR.TestData/SS.PaddleOCR.TestData.csproj" />
+    <Project Path="test/SS.PaddleOCR.Tests/SS.PaddleOCR.Tests.csproj" />
+    <Project Path="test/SS.PaddleOCR.TestReport/SS.PaddleOCR.TestReport.csproj" />
+    <Project Path="test/SS.PaddleOCR.UnitTests/SS.PaddleOCR.UnitTests.csproj" />
+    <Project Path="test/SS.PaddleOCR.WasmBench/SS.PaddleOCR.WasmBench.csproj" />
+  </Folder>
+</Solution>

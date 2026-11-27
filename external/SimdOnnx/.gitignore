@@ -1,0 +1,19 @@
+bin/
+obj/
+.vs/
+*.user
+vstest*.log
+artifacts/
+.baseline-bin/
+.rerun/
+*.log
+*.f32
+build/nupkgs/
+build/nuget.exe
+
+# raw A/B benchmark JSON (summaries live in docs/ab/*.txt)
+docs/ab/paddle/
+docs/ab/paddle-*/
+docs/ab/gcdr-r*.txt
+docs/ab/android-paddle/
+docs/ab/tiny-probe/

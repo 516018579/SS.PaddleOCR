@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Development build of the engine (tests, bench). Consumers do not reference this project: they
+       import Sdcb.SimdOnnx.Sources.props and compile the engine into their own assembly. -->
+  <PropertyGroup>
+    <TargetFramework></TargetFramework>
+    <TargetFrameworks>net10.0;netstandard2.0</TargetFrameworks>
+    <AssemblyName>Sdcb.SimdOnnx</AssemblyName>
+    <RootNamespace>Sdcb.SimdOnnx</RootNamespace>
+    <IsAotCompatible Condition="'$(TargetFramework)' == 'net10.0'">true</IsAotCompatible>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <!-- consumers that generate docs compile these comments too: keep them valid here -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <Import Project="Sdcb.SimdOnnx.Sources.props" />
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Remove="Backends\Vulkan\Shaders\*.comp" />
+    <None Remove="Backends\Vulkan\Shaders\*.spv" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,31 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "et.glsl"
+// Generic rank<=6 strided slice: dst[k0..k5] = src[sum (start_k + k*step_k) * inStride_k].
+layout(local_size_x = 256) in;
+
+layout(set = 0, binding = 0) readonly buffer X { ET x[]; };
+layout(set = 0, binding = 1) writeonly buffer O { ET o[]; };
+
+layout(push_constant) uniform PC {
+    uint n;
+    uint os[5];                      // out strides of dims 0..4 (dim 5 stride = 1)
+    uint st[6];                      // start per out dim
+    uint sp[6];                      // step per out dim
+    uint is[6];                      // in strides
+} p;
+
+void main()
+{
+    uint i = gl_GlobalInvocationID.x + gl_GlobalInvocationID.y * gl_NumWorkGroups.x * 256u;
+    if (i >= p.n) return;
+    uint r = i, src = 0u;
+    for (int k = 0; k < 5; k++)
+    {
+        uint dk = r / p.os[k];
+        r -= dk * p.os[k];
+        src += (p.st[k] + dk * p.sp[k]) * p.is[k];
+    }
+    src += (p.st[5] + r * p.sp[5]) * p.is[5];
+    o[i] = x[src];
+}

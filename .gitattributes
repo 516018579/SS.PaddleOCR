@@ -12,6 +12,10 @@
 *.json     text eol=lf
 *.yml      text eol=lf
 
+# Dictionaries are read line by line and the lines are the class labels: a CRLF
+# checkout would put a stray \r into every label.
+*.txt      text eol=lf
+
 *.onnx     binary
 *.pdmodel  binary
 *.bmp      binary

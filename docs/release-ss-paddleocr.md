@@ -219,5 +219,6 @@ YAML 会给需要保护的标量加单引号（`'!'`、`'"'`、`'#'`、`','`、`
 版本：`SS.PaddleOCR.Models.KoreanV5Mobile` 1.0.1 → **1.0.2**（三处同步：`Directory.Build.props:13`、
 `build/00-common.linq:37`、`build/pack-nuget.ps1:46`）；其余包不动。核心包内容未变，仍是 1.0.2。
 已发布的 1.0.0 / 1.0.1 模型包含带引号的字典，只有装了新版模型包的调用方才会拿到修好的解码文本。
-**1.0.2 目前只在本地：版本三处已同步、`nupkgs\` 里已有包、提交 `1161122` 已推送，但按用户要求
-「先不发，等我再说」尚未发布到 nuget.org。**
+**1.0.2 已于 2026-11-28T16:01:27Z 发布**：dry run [`46162649037`](https://github.com/516018579/SS.PaddleOCR/actions/runs/46162649037)（日志确认打的是 1.0.2、`WhatIf: nothing was pushed`），
+真推 [`46162779819`](https://github.com/516018579/SS.PaddleOCR/actions/runs/46162779819)（`pushing SS.PaddleOCR.Models.KoreanV5Mobile.1.0.2.nupkg` → `Your package was pushed`，其 `.snupkg` 同样）。
+同一次 run 里其余 6 个包因 `--skip-duplicate` 全部 `already exists` 跳过。用户此前曾选「先不发」，2026-11-28 改口「发上去」。

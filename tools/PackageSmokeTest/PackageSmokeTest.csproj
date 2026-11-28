@@ -8,10 +8,12 @@
     <!--
       Default: consume the published packages, which is what this tool exists to
       check. For working on the library itself, run with
-      -p:UseProjectCore=true to swap the core package for a project reference
-      (the model packages still come from NuGet).
+      -p:UseProjectCore=true to swap the core package for a project reference.
+      -p:UseProjectModels=true does the same for the model packages, which is
+      how a change to the embedded dictionaries gets exercised.
     -->
     <UseProjectCore Condition="'$(UseProjectCore)' == ''">false</UseProjectCore>
+    <UseProjectModels Condition="'$(UseProjectModels)' == ''">false</UseProjectModels>
   </PropertyGroup>
   <ItemGroup Condition="'$(UseProjectCore)' != 'true'">
     <PackageReference Include="SS.PaddleOCR" Version="1.0.0" />
@@ -19,10 +21,15 @@
   <ItemGroup Condition="'$(UseProjectCore)' == 'true'">
     <ProjectReference Include="..\..\src\SS.PaddleOCR\SS.PaddleOCR.csproj" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Condition="'$(UseProjectModels)' != 'true'">
     <PackageReference Include="SS.PaddleOCR.Models.KoreanV5Mobile" Version="1.0.0" />
     <PackageReference Include="SS.PaddleOCR.Models.ChineseV6Small" Version="1.0.0" />
     <PackageReference Include="SS.PaddleOCR.Models.ChineseV6Medium" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(UseProjectModels)' == 'true'">
+    <ProjectReference Include="..\..\src\models\SS.PaddleOCR.Models.KoreanV5Mobile\SS.PaddleOCR.Models.KoreanV5Mobile.csproj" />
+    <ProjectReference Include="..\..\src\models\SS.PaddleOCR.Models.ChineseV6Small\SS.PaddleOCR.Models.ChineseV6Small.csproj" />
+    <ProjectReference Include="..\..\src\models\SS.PaddleOCR.Models.ChineseV6Medium\SS.PaddleOCR.Models.ChineseV6Medium.csproj" />
   </ItemGroup>
   <ItemGroup>
     <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">

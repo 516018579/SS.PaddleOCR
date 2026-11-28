@@ -10,7 +10,7 @@
     <SSPaddleOCRModelsChineseV6TinyVersion Condition="'$(SSPaddleOCRModelsChineseV6TinyVersion)' == ''">1.0.1</SSPaddleOCRModelsChineseV6TinyVersion>
     <SSPaddleOCRModelsChineseV6SmallVersion Condition="'$(SSPaddleOCRModelsChineseV6SmallVersion)' == ''">1.0.1</SSPaddleOCRModelsChineseV6SmallVersion>
     <SSPaddleOCRModelsChineseV6MediumVersion Condition="'$(SSPaddleOCRModelsChineseV6MediumVersion)' == ''">1.0.1</SSPaddleOCRModelsChineseV6MediumVersion>
-    <SSPaddleOCRModelsKoreanV5MobileVersion Condition="'$(SSPaddleOCRModelsKoreanV5MobileVersion)' == ''">1.0.1</SSPaddleOCRModelsKoreanV5MobileVersion>
+    <SSPaddleOCRModelsKoreanV5MobileVersion Condition="'$(SSPaddleOCRModelsKoreanV5MobileVersion)' == ''">1.0.2</SSPaddleOCRModelsKoreanV5MobileVersion>
   </PropertyGroup>
 
   <!--

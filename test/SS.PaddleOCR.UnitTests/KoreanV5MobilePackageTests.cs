@@ -49,7 +49,7 @@ public class KoreanV5MobilePackageTests
     {
         Assert.Equal(4826518, KoreanV5MobileModel.Detection.OpenRead().Length);
         Assert.Equal(13418787, KoreanV5MobileModel.Recognition.OpenRead().Length);
-        Assert.Equal(47514, KoreanV5MobileModel.Dictionary.OpenRead().Length);
+        Assert.Equal(47451, KoreanV5MobileModel.Dictionary.OpenRead().Length);
     }
 
     [Fact]
@@ -62,6 +62,15 @@ public class KoreanV5MobilePackageTests
         Assert.Equal("\u1102", lines[2]);
         Assert.Equal("\u03c9", lines[^1]);
         Assert.DoesNotContain(lines, l => l.IndexOf('\r') >= 0);
+
+        // The dictionary was extracted from an `inference.yml` `character_dict`, where YAML quotes
+        // the scalars that need it ('!', ',', '0' ...) or keeps numeric-looking values strings.
+        // An extractor that kept those quotes made decoded text read "침해','청소년" instead of
+        // "침해,청소년", so the punctuation entries are pinned here.
+        Assert.Equal("!", lines[11504]);
+        Assert.Equal("'", lines[11510]);
+        Assert.Equal(",", lines[11515]);
+        Assert.DoesNotContain(lines, l => l.Length >= 2 && l[0] == '\'' && l[^1] == '\'');
     }
 
     [Fact]

@@ -40,3 +40,13 @@ dotnet run -c Debug -- zh-medium   # 中文 PP-OCRv6 medium
 
 会打印每个 provider 的 Name/Kind/Format/Language/Version/字节数，再跑 `PaddleOcrAll` 并输出逐行结果。
 每次跑前建议删掉 `packages\`、`obj\`、`bin\`，确保是真正的全新还原。
+
+调本地源码时的两个开关（默认都关，走 NuGet 包）：
+
+```powershell
+dotnet run -p:UseProjectCore=true   -- ko    # 核心包换成 ProjectReference
+dotnet run -p:UseProjectCore=true -p:UseProjectModels=true -- ko  # 模型包也换成工程引用
+```
+
+`UseProjectModels=true` 是验证字典类改动（模型包里嵌的是 `models\*.txt`）的唯一办法，
+只改核心包时不必带它。

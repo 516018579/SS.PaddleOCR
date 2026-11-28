@@ -192,3 +192,30 @@ Console.WriteLine(result.Text);
 - 最终核对（2026-11-28T00:41Z，`azuresearch` 逐包 `packageid:` 轮询约 7 分钟才全部刷新）：
   7 个包全部命中 `authors = Rinne`、`projectUrl = https://github.com/516018579/SS.PaddleOCR`，
   版本为 核心 1.0.2 / 其余 1.0.1。
+
+## 模型包 1.0.2（2026-11-28）：韩语字典把 YAML 引号当成了字符
+
+`models/korean_v5_keys.txt` 是从 official paddlex `inference.yml` 的 `character_dict` 抽出来的。
+YAML 会给需要保护的标量加单引号（`'!'`、`'"'`、`'#'`、`','`、`'0'`…，共 31 条，正是 YAML 保留字符
+和「看起来像数字」的那些），抽取脚本把引号当成了字符内容一起保留下来。字典本身行数/顺序没错
+（11945 行、`ClassCount` 11947），所以模型输出对、解码文本错：本该是 `침해,청소년보호법` 的位置
+被拼成 `침해','청소년보호법`——逗号两侧多出两个单引号，`!`、`?`、`~`、数字同理。
+
+修复：按 YAML 规则去掉这 31 条的外层引号（含 `''''` → `'`）。字典从 47514 字节变为 47451 字节，
+行数不变。回归钉在 `test/SS.PaddleOCR.UnitTests/KoreanV5MobilePackageTests.cs` 的
+`DictionaryHasExpectedShape`：钉住索引 11504 `!`、11510 `'`、11515 `,`，并断言没有条目首尾带引号。
+
+本地验证（`ko_comma.bmp` / `ko_bubble.bmp` 为本地样张，未入库）：
+
+| 样张 | 修前 | 修后 |
+| --- | --- | --- |
+| `ko_comma.bmp`（1211x336，4 行） | `저작권 침해','청소년보호법 위반','재산권 침해 등의` | `저작권 침해,청소년보호법 위반,재산권 침해 등의`（0.9844） |
+| `ko_bubble.bmp`（5 行漫画字） | `어머'~''!'`、`얘들아'!'`、`이렇게나 컸다고'?'` | `어머~!`、`얘들아!`、`이렇게나 컸다고?` |
+
+`tools/PackageSmokeTest` 原先把三个模型包固定成 NuGet 引用，所以本地改字典跑不出来；本轮加了
+`-p:UseProjectModels=true`（与 `UseProjectCore=true` 并列），把模型包也换成工程引用，才能用冒烟工具
+验证嵌进包里的字典。
+
+版本：`SS.PaddleOCR.Models.KoreanV5Mobile` 1.0.1 → **1.0.2**（三处同步：`Directory.Build.props:13`、
+`build/00-common.linq:37`、`build/pack-nuget.ps1:46`）；其余包不动。核心包内容未变，仍是 1.0.2。
+已发布的 1.0.0 / 1.0.1 模型包含带引号的字典，只有装了新版模型包的调用方才会拿到修好的解码文本。

@@ -34,7 +34,7 @@ static ProjectVersion[] Projects =
 	new("SS.PaddleOCR.Models.ChineseV6Tiny", "1.0.1"),
 	new("SS.PaddleOCR.Models.ChineseV6Small", "1.0.1"),
 	new("SS.PaddleOCR.Models.ChineseV6Medium", "1.0.1"),
-	new("SS.PaddleOCR.Models.KoreanV5Mobile", "1.0.1"),
+	new("SS.PaddleOCR.Models.KoreanV5Mobile", "1.0.2"),
 };
 
 static string VersionPropertyName(string projectName) => projectName.Replace(".", "") + "Version";

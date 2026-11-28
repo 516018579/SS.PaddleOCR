@@ -43,7 +43,7 @@ $packages = @(
     @{ Name = 'SS.PaddleOCR.Models.ChineseV6Tiny';          Version = '1.0.1' }
     @{ Name = 'SS.PaddleOCR.Models.ChineseV6Small';         Version = '1.0.1' }
     @{ Name = 'SS.PaddleOCR.Models.ChineseV6Medium';        Version = '1.0.1' }
-    @{ Name = 'SS.PaddleOCR.Models.KoreanV5Mobile';         Version = '1.0.1' }
+    @{ Name = 'SS.PaddleOCR.Models.KoreanV5Mobile';         Version = '1.0.2' }
     @{ Name = 'SS.PaddleOCR';                               Version = '1.0.2' }
 )
 
